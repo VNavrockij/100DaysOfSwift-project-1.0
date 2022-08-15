@@ -23,6 +23,7 @@ class ViewController: UIViewController {
         for item in items {
             if item.hasPrefix("nssl") {
                 print("Ok")
+                
             }
         }
     }
