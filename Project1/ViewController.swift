@@ -13,6 +13,11 @@ class ViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationController?.navigationBar.prefersLargeTitles = true
+        
+        title = "Storm Viewer"
+        
         /** The line let fm = FileManager.default declares a constant called fm and assigns it the value returned by FileManager.default. This is a data type that lets us work with the filesystem, and in our case we'll be using it to look for files. */
         let fm = FileManager.default
         /** The line let path = Bundle.main.resourcePath! declares a constant called path that is set to the resource path of our app's bundle. Remember, a bundle is a directory containing our compiled program and all our assets. So, this line says, "tell me where I can find all those images I added to my app." */
@@ -27,6 +32,7 @@ class ViewController: UITableViewController {
                 
             }
         }
+        pictures.sort()
         print(pictures)
     }
     
@@ -45,6 +51,10 @@ class ViewController: UITableViewController {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
             // 2: success! Set its selectedImage property
             vc.selectedImage = pictures[indexPath.row]
+            
+            vc.selectedPictureNumber = pictures.firstIndex(of: vc.selectedImage!)!
+
+            vc.totalPictures = pictures.count
             // 3: now push it onto the navigation controller
             navigationController?.pushViewController(vc, animated: true)
         }
